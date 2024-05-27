@@ -15,5 +15,3 @@ render(new InfoTripView(), infoTripElement, RenderPosition.AFTERBEGIN);
 render(new FilterView(), filterElement);
 
 eventsPresenter.init();
-
-
