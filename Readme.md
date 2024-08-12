@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Данила Крохмалев](https://up.htmlacademy.ru/ecmascript-individual/2/user/567869).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Соловьев](https://htmlacademy.ru/profile/id2282557).
 
 ---
 
