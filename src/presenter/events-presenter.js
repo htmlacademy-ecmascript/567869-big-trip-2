@@ -14,9 +14,9 @@ export default class EventsPresenter {
   }
 
   init() {
-    this.eventPoints = [...this.pointsModel.getPoints()];
-    this.eventDestinations = [...this.pointsModel.getDestinations()];
-    this.eventOffers = [...this.pointsModel.getOffers()];
+    this.eventPoints = this.pointsModel.getPoints();
+    this.eventDestinations = this.pointsModel.getDestinations();
+    this.eventOffers = this.pointsModel.getOffers();
 
     render(this.sortComponent, this.container);
     render(new EditPointView({
