@@ -15,7 +15,6 @@ module.exports = {
       template: 'public/index.html',
     }),
     new CopyPlugin({
-<<<<<<< HEAD
       patterns: [
         {
           from: 'public',
@@ -24,14 +23,6 @@ module.exports = {
           },
         },
       ],
-=======
-      patterns: [{
-        from: 'public',
-          globOptions: {
-            ignore: ['**/index.html'],
-          },
-      }],
->>>>>>> upstream/master
     }),
   ],
   module: {
@@ -46,15 +37,10 @@ module.exports = {
           },
         },
       },
-<<<<<<< HEAD
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
       },
     ],
   },
-=======
-    ]
-  }
->>>>>>> upstream/master
 };
