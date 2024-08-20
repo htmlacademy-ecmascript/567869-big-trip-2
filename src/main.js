@@ -10,7 +10,7 @@ const eventsElement = document.querySelector('.trip-events');
 
 const pointsModel = new PointsModel();
 const eventsPresenter = new EventsPresenter({
-  container: eventsElement,
+  eventsContainer: eventsElement,
   pointsModel
 });
 
