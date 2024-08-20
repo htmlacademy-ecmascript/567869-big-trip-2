@@ -6,20 +6,32 @@ import SortView from '../view/sort-view.js';
 
 export default class EventsPresenter {
   eventsListComponent = new EventsListView();
-  editPointComponent = new EditPointView();
   sortComponent = new SortView();
 
-  constructor({ container }) {
+  constructor({ container, pointsModel }) {
     this.container = container;
+    this.pointsModel = pointsModel;
   }
 
   init() {
-    render(this.sortComponent, this.container);
-    render(this.editPointComponent, this.container);
-    render(this.eventsListComponent, this.container);
+    this.eventPoints = this.pointsModel.getPoints();
+    this.eventDestinations = this.pointsModel.getDestinations();
+    this.eventOffers = this.pointsModel.getOffers();
 
-    for (let i = 0; i < 3; i++) {
-      render(new PointView(), this.eventsListComponent.getElement());
+    render(this.sortComponent, this.container);
+    render(new EditPointView({
+      point: this.eventPoints[0],
+      offers: this.eventOffers,
+      destinations: this.eventDestinations
+    }), this.container);
+
+    render(this.eventsListComponent, this.container);
+    for (let i = 0; i < this.eventPoints.length; i++) {
+      render(new PointView({
+        point: this.eventPoints[i],
+        offers: this.eventOffers,
+        destinations: this.eventDestinations
+      }), this.eventsListComponent.getElement());
     }
   }
 }

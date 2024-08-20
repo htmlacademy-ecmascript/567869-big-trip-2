@@ -15,12 +15,14 @@ module.exports = {
       template: 'public/index.html',
     }),
     new CopyPlugin({
-      patterns: [{
-        from: 'public',
+      patterns: [
+        {
+          from: 'public',
           globOptions: {
             ignore: ['**/index.html'],
           },
-      }],
+        },
+      ],
     }),
   ],
   module: {
@@ -35,6 +37,10 @@ module.exports = {
           },
         },
       },
-    ]
-  }
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+    ],
+  },
 };
