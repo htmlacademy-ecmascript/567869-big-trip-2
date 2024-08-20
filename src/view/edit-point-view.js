@@ -1,5 +1,5 @@
 import { DATETIME_FORMAT_SLASH, POINT_TYPES } from '../consts.js';
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils.js';
 
 function createOffersTemplate(point, offers) {
@@ -130,26 +130,19 @@ function createEditPointTemplate(point, offers, destinations) {
   `;
 }
 
-export default class EditPointView {
-  constructor({ point, offers, destinations }) {
-    this.point = point;
-    this.offers = offers;
-    this.destinations = destinations;
+export default class EditPointView extends AbstractView {
+  #point = null;
+  #offers = null;
+  #destinations = null;
+
+  constructor({point, offers, destinations}) {
+    super();
+    this.#point = point;
+    this.#offers = offers;
+    this.#destinations = destinations;
   }
 
-  getTemplate() {
-    return createEditPointTemplate(this.point, this.offers, this.destinations);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createEditPointTemplate(this.#point, this.#offers, this.#destinations);
   }
 }

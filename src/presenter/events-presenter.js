@@ -1,4 +1,4 @@
-import { render } from '../render.js';
+import { render } from '../framework/render.js';
 import EditPointView from '../view/edit-point-view.js';
 import EventsListView from '../view/events-list-view.js';
 import PointView from '../view/point-view.js';
@@ -31,7 +31,7 @@ export default class EventsPresenter {
         point: this.eventPoints[i],
         offers: this.eventOffers,
         destinations: this.eventDestinations
-      }), this.eventsListComponent.getElement());
+      }), this.eventsListComponent.element);
     }
   }
 }
