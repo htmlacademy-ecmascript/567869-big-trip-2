@@ -1,6 +1,6 @@
 import { DATETIME_FORMAT_SLASH, POINT_TYPES } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeDate } from '../utils.js';
+import { humanizeDate } from '../utils/point.js';
 
 function createOffersTemplate(point, offers) {
 

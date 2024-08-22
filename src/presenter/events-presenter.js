@@ -1,5 +1,6 @@
 import { render, replace } from '../framework/render.js';
 import EditPointView from '../view/edit-point-view.js';
+import EmptyPointsView from '../view/empty-points-view.js';
 import EventListView from '../view/event-list-view.js';
 import PointView from '../view/point-view.js';
 import SortView from '../view/sort-view.js';
@@ -10,6 +11,7 @@ export default class EventsPresenter {
 
   #eventListComponent = new EventListView();
   #sortComponent = new SortView();
+  #emptyPointsComponent = new EmptyPointsView();
 
   #eventPoints = [];
   #eventDestinations = [];
@@ -59,6 +61,11 @@ export default class EventsPresenter {
   }
 
   #renderEvents() {
+    if (this.#eventPoints.length === 0) {
+      render(this.#emptyPointsComponent, this.#eventsContainer);
+      return;
+    }
+
     render(this.#sortComponent, this.#eventsContainer);
 
     render(this.#eventListComponent, this.#eventsContainer);
