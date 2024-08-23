@@ -1,5 +1,5 @@
 import { DATETIME_FORMAT_SLASH, POINT_TYPES } from '../consts.js';
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils.js';
 
 function createOffersTemplate(point, offers) {
@@ -130,26 +130,29 @@ function createEditPointTemplate(point, offers, destinations) {
   `;
 }
 
-export default class EditPointView {
-  constructor({ point, offers, destinations }) {
-    this.point = point;
-    this.offers = offers;
-    this.destinations = destinations;
+export default class EditPointView extends AbstractView {
+  #point = null;
+  #offers = null;
+  #destinations = null;
+  #handleFormSubmit = null;
+
+  constructor({point, offers, destinations, onFormSubmit}) {
+    super();
+    this.#point = point;
+    this.#offers = offers;
+    this.#destinations = destinations;
+    this.#handleFormSubmit = onFormSubmit;
+
+    this.element.addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formSubmitHandler);
   }
 
-  getTemplate() {
-    return createEditPointTemplate(this.point, this.offers, this.destinations);
+  get template() {
+    return createEditPointTemplate(this.#point, this.#offers, this.#destinations);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
+  };
 }
