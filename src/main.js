@@ -12,6 +12,6 @@ const eventsPresenter = new EventsPresenter({
   pointsModel
 });
 
-render(new FilterView(), filterElement);
+render(new FilterView(pointsModel.points), filterElement);
 
 eventsPresenter.init();
