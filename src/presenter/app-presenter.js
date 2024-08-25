@@ -1,10 +1,9 @@
 import { NoPointListMessage } from '../consts.js';
-import { render, replace } from '../framework/render.js';
-import EditPointView from '../view/edit-point-view.js';
+import { render } from '../framework/render.js';
 import EmptyPointsView from '../view/empty-points-view.js';
 import EventListView from '../view/event-list-view.js';
-import PointView from '../view/point-view.js';
 import SortView from '../view/sort-view.js';
+import PointPresenter from './point-presenter.js';
 
 export default class AppPresenter {
   #eventsContainer = null;
@@ -24,10 +23,6 @@ export default class AppPresenter {
   }
 
   init() {
-    this.#eventPoints = this.#pointsModel.points;
-    this.#eventOffers = this.#pointsModel.offers;
-    this.#eventDestinations = this.#pointsModel.destinations;
-
     this.#renderApp();
   }
 
@@ -44,46 +39,24 @@ export default class AppPresenter {
   }
 
   #renderPoint(point, offers, destinations) {
-    const escKeyDownHandler = (evt) => {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        replaceEditFormToPoint();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    };
-
-    const pointComponent = new PointView({
-      point, offers, destinations, onEditClick: () => {
-        replacePointToEditForm();
-        document.addEventListener('keydown', escKeyDownHandler);
-      }
+    const pointPresenter = new PointPresenter({
+      pointListContainer: this.#eventListComponent.element,
     });
 
-    const pointEditComponent = new EditPointView({
-      point, offers, destinations, onFormSubmit: () => {
-        replaceEditFormToPoint();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    });
-
-    function replacePointToEditForm() {
-      replace(pointEditComponent, pointComponent);
-    }
-
-    function replaceEditFormToPoint() {
-      replace(pointComponent, pointEditComponent);
-    }
-
-    render(pointComponent, this.#eventListComponent.element);
+    pointPresenter.init(point, offers, destinations);
   }
 
-  #renderPoints() {
-    this.#eventPoints.forEach((point) => {
-      this.#renderPoint(point, this.#eventOffers, this.#eventDestinations);
+  #renderPoints(points, destinations, offers) {
+    points.forEach((point) => {
+      this.#renderPoint(point, destinations, offers);
     });
   }
 
   #renderApp() {
+    this.#eventPoints = this.#pointsModel.points;
+    this.#eventOffers = this.#pointsModel.offers;
+    this.#eventDestinations = this.#pointsModel.destinations;
+
     if (this.#eventPoints.length === 0) {
       this.#renderNoPoints();
       return;
@@ -91,7 +64,6 @@ export default class AppPresenter {
 
     this.#renderSort();
     this.#renderPointList();
-    this.#renderPoints();
-
+    this.#renderPoints(this.#eventPoints, this.#eventOffers, this.#eventDestinations);
   }
 }
