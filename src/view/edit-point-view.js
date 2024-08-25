@@ -1,4 +1,4 @@
-import { DATETIME_FORMAT_SLASH, POINT_TYPES } from '../consts.js';
+import { DateTimeFormat, POINT_TYPES } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils/point.js';
 
@@ -103,10 +103,10 @@ function createEditPointTemplate(point, offers, destinations) {
 
       <div class="event__field-group  event__field-group--time">
         <label class="visually-hidden" for="event-start-time-1">From</label>
-        <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${humanizeDate(dateFrom, DATETIME_FORMAT_SLASH)}">
+        <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${humanizeDate(dateFrom, DateTimeFormat.LONG_DATE_FOR_EDIT)}">
         &mdash;
         <label class="visually-hidden" for="event-end-time-1">To</label>
-        <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${humanizeDate(dateTo, DATETIME_FORMAT_SLASH)}">
+        <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${humanizeDate(dateTo, DateTimeFormat.LONG_DATE_FOR_EDIT)}">
       </div>
 
       <div class="event__field-group  event__field-group--price">

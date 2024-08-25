@@ -1,4 +1,4 @@
-import { EmptyPointListMessage } from '../consts.js';
+import { NoPointListMessage } from '../consts.js';
 import { render, replace } from '../framework/render.js';
 import EditPointView from '../view/edit-point-view.js';
 import EmptyPointsView from '../view/empty-points-view.js';
@@ -12,7 +12,7 @@ export default class AppPresenter {
 
   #eventListComponent = new EventListView();
   #sortComponent = new SortView();
-  #emptyPointsComponent = new EmptyPointsView(EmptyPointListMessage.EVERYTHING);
+  #emptyPointsComponent = new EmptyPointsView(NoPointListMessage.EVERYTHING);
 
   #eventPoints = [];
   #eventDestinations = [];
