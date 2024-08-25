@@ -1,4 +1,4 @@
-const POINT_COUNT = 4;
+const POINT_COUNT = 3;
 const POINT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 const TIME_FORMAT = 'HH:mm';
 const DATE_FORMAT = 'MMM D';
