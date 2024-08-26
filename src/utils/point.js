@@ -1,9 +1,5 @@
 import dayjs from 'dayjs';
 
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -20,11 +16,12 @@ function calculateTimeDifference(dateFrom, dateTo) {
   const remainingHours = hours % 24;
 
   if (days > 0) {
-    return `${days}D ${remainingHours}H ${minutes}M`;
+    return `${days.toString().padStart(2, '0')}D ${remainingHours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
   } else if (hours > 0) {
-    return `${hours}H ${minutes}M`;
+    return `${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
   } else {
-    return `${minutes}M`;
+    return `${minutes.toString().padStart(2, '0')}M`;
   }
 }
-export { getRandomArrayElement, humanizeDate, calculateTimeDifference };
+
+export { humanizeDate, calculateTimeDifference };

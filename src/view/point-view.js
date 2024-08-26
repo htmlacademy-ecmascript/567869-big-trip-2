@@ -1,6 +1,6 @@
 import { DATE_FORMAT, DATETIME_FORMAT, TIME_FORMAT } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
-import { calculateTimeDifference, humanizeDate } from '../utils.js';
+import { calculateTimeDifference, humanizeDate } from '../utils/point.js';
 
 function createSelectedOffersTemplate(point, offers) {
   const offerData = offers.find((offer) => offer.type === point.type);
