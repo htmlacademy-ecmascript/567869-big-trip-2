@@ -16,6 +16,7 @@ export default class AppPresenter {
   #eventPoints = [];
   #eventDestinations = [];
   #eventOffers = [];
+  #pointPresenters = new Map();
 
   constructor({ eventsContainer, pointsModel }) {
     this.#eventsContainer = eventsContainer;
@@ -44,12 +45,18 @@ export default class AppPresenter {
     });
 
     pointPresenter.init(point, offers, destinations);
+    this.#pointPresenters.set(point.id, pointPresenter);
   }
 
   #renderPoints(points, destinations, offers) {
     points.forEach((point) => {
       this.#renderPoint(point, destinations, offers);
     });
+  }
+
+  #clearPoints() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
   }
 
   #renderApp() {
