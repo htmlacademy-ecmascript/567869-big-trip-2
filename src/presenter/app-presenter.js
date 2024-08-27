@@ -1,5 +1,6 @@
 import { NoPointListMessage } from '../consts.js';
 import { render } from '../framework/render.js';
+import { updateItem } from '../utils/common.js';
 import EmptyPointsView from '../view/empty-points-view.js';
 import EventListView from '../view/event-list-view.js';
 import SortView from '../view/sort-view.js';
@@ -73,4 +74,9 @@ export default class AppPresenter {
     this.#renderPointList();
     this.#renderPoints(this.#eventPoints, this.#eventOffers, this.#eventDestinations);
   }
+
+  #handlePointChange = (updatePoint) => {
+    this.#eventPoints = updateItem(this.#eventPoints, updatePoint);
+    this.#pointPresenters.get(updatePoint.id).init(updatePoint);
+  };
 }
