@@ -54,16 +54,12 @@ export default class AppPresenter {
       pointListContainer: this.#eventListComponent.element,
       offers: this.#eventOffers,
       destinations: this.#eventDestinations,
-      onDataChange: this.#handlePointChange
+      onDataChange: this.#handlePointChange,
+      onModeChange: this.#handleModeChange,
     });
 
     pointPresenter.init(point);
     this.#pointPresenters.set(point.id, pointPresenter);
-  }
-
-  #clearPoints() {
-    this.#pointPresenters.forEach((presenter) => presenter.destroy());
-    this.#pointPresenters.clear();
   }
 
   #renderApp() {
@@ -78,5 +74,9 @@ export default class AppPresenter {
   #handlePointChange = (updatePoint) => {
     this.#eventPoints = updateItem(this.#eventPoints, updatePoint);
     this.#pointPresenters.get(updatePoint.id).init(updatePoint);
+  };
+
+  #handleModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetFormView());
   };
 }

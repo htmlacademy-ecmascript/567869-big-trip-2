@@ -1,6 +1,11 @@
 const POINT_COUNT = 3;
 const POINT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING'
+};
+
 const DateTimeFormat = {
   TIME: 'HH:mm',
   SHORT_DATE: 'MMM D',
@@ -15,4 +20,10 @@ const NoPointListMessage = {
   PAST: 'There are no past events now',
 };
 
-export { POINT_COUNT, POINT_TYPES, DateTimeFormat, NoPointListMessage };
+export {
+  POINT_COUNT,
+  POINT_TYPES,
+  Mode,
+  DateTimeFormat,
+  NoPointListMessage
+};
