@@ -25,6 +25,15 @@ export default class AppPresenter {
   }
 
   init() {
+    this.#eventPoints = this.#pointsModel.points;
+    this.#eventOffers = this.#pointsModel.offers;
+    this.#eventDestinations = this.#pointsModel.destinations;
+
+    if (this.#eventPoints.length === 0) {
+      this.#renderNoPoints();
+      return;
+    }
+
     this.#renderApp();
   }
 
@@ -40,19 +49,16 @@ export default class AppPresenter {
     render(this.#emptyPointsComponent, this.#eventsContainer);
   }
 
-  #renderPoint(point, offers, destinations) {
+  #renderPoint(point) {
     const pointPresenter = new PointPresenter({
       pointListContainer: this.#eventListComponent.element,
+      offers: this.#eventOffers,
+      destinations: this.#eventDestinations,
+      onDataChange: this.#handlePointChange
     });
 
-    pointPresenter.init(point, offers, destinations);
+    pointPresenter.init(point);
     this.#pointPresenters.set(point.id, pointPresenter);
-  }
-
-  #renderPoints(points, destinations, offers) {
-    points.forEach((point) => {
-      this.#renderPoint(point, destinations, offers);
-    });
   }
 
   #clearPoints() {
@@ -61,18 +67,12 @@ export default class AppPresenter {
   }
 
   #renderApp() {
-    this.#eventPoints = this.#pointsModel.points;
-    this.#eventOffers = this.#pointsModel.offers;
-    this.#eventDestinations = this.#pointsModel.destinations;
-
-    if (this.#eventPoints.length === 0) {
-      this.#renderNoPoints();
-      return;
-    }
-
     this.#renderSort();
     this.#renderPointList();
-    this.#renderPoints(this.#eventPoints, this.#eventOffers, this.#eventDestinations);
+
+    for (let i = 0; i < this.#eventPoints.length; i++) {
+      this.#renderPoint(this.#eventPoints[i]);
+    }
   }
 
   #handlePointChange = (updatePoint) => {
