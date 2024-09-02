@@ -20,9 +20,7 @@ const mockPoints = [
     dateTo: '2024-08-23T14:40:13.375Z',
     destination: 'saint-petersburg-point-2',
     isFavorite: true,
-    offers: [
-      'ship-econom'
-    ],
+    offers: [],
     type: 'ship'
   },
   {

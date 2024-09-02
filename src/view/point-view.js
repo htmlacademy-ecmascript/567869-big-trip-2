@@ -1,4 +1,4 @@
-import { DATE_FORMAT, DATETIME_FORMAT, TIME_FORMAT } from '../consts.js';
+import { DateTimeFormat } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
 import { calculateTimeDifference, humanizeDate } from '../utils/point.js';
 
@@ -36,16 +36,16 @@ function createPointTemplate(point, offers, destinations) {
 
   return `
     <div class="event">
-      <time class="event__date" datetime="${dateFrom}">${humanizeDate(dateFrom, DATE_FORMAT)}</time>
+      <time class="event__date" datetime="${dateFrom}">${humanizeDate(dateFrom, DateTimeFormat.SHORT_DATE)}</time>
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
       <h3 class="event__title">${type} ${name}</h3>
       <div class="event__schedule">
         <p class="event__time">
-          <time class="event__start-time" datetime="${humanizeDate(dateFrom, DATETIME_FORMAT)}">${humanizeDate(dateFrom, TIME_FORMAT)}</time>
+          <time class="event__start-time" datetime="${humanizeDate(dateFrom, DateTimeFormat.LONG_DATE)}">${humanizeDate(dateFrom, DateTimeFormat.TIME)}</time>
           &mdash;
-          <time class="event__end-time" datetime="${humanizeDate(dateTo, DATETIME_FORMAT)}">${humanizeDate(dateTo, TIME_FORMAT)}</time>
+          <time class="event__end-time" datetime="${humanizeDate(dateTo, DateTimeFormat.LONG_DATE)}">${humanizeDate(dateTo, DateTimeFormat.TIME)}</time>
         </p>
         <p class="event__duration">${calculateTimeDifference(dateFrom,dateTo)}</p>
       </div>
@@ -74,15 +74,18 @@ export default class PointView extends AbstractView {
   #offers = null;
   #destinations = null;
   #handleEditClick = null;
+  #handleFavoriteClick = null;
 
-  constructor({point, offers, destinations, onEditClick}) {
+  constructor({point, offers, destinations, onEditClick, onFavoriteClick}) {
     super();
     this.#point = point;
     this.#offers = offers;
     this.#destinations = destinations;
     this.#handleEditClick = onEditClick;
+    this.#handleFavoriteClick = onFavoriteClick;
 
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#eventClickHandler);
+    this.element.querySelector('.event__favorite-btn').addEventListener('click', this.#favoriteClickHandler);
   }
 
   get template() {
@@ -92,5 +95,9 @@ export default class PointView extends AbstractView {
   #eventClickHandler = (evt) => {
     evt.preventDefault();
     this.#handleEditClick();
+  };
+
+  #favoriteClickHandler = () => {
+    this.#handleFavoriteClick();
   };
 }

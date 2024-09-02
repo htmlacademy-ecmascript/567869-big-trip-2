@@ -1,4 +1,4 @@
-import { DATETIME_FORMAT_SLASH, POINT_TYPES } from '../consts.js';
+import { DateTimeFormat, POINT_TYPES } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeDate } from '../utils/point.js';
 
@@ -19,7 +19,7 @@ function createOffersTemplate(point, offers) {
       <div class="event__available-offers">
         ${offersType.map((offer) => {
       const isChecked = point.offers.includes(offer.id) ? 'checked' : '';
-      const {id, title, price} = offer;
+      const { id, title, price } = offer;
       return `<div class="event__offer-selector">
             <input class="event__offer-checkbox visually-hidden" id="${id}" type="checkbox" name="event-offer-${id}"${isChecked}>
             <label class="event__offer-label" for="${id}">
@@ -95,39 +95,37 @@ function createEditPointTemplate(point, offers, destinations) {
         </label>
         <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${name}" list="destination-list-1">
         <datalist id="destination-list-1">
-          <option value="Amsterdam"></option>
-          <option value="Geneva"></option>
-          <option value="Chamonix"></option>
+          ${destinations.map((destination) => `<option value="${destination.name}">${destination.name}</option>`)}
         </datalist>
-      </div>
+</div>
 
-      <div class="event__field-group  event__field-group--time">
-        <label class="visually-hidden" for="event-start-time-1">From</label>
-        <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${humanizeDate(dateFrom, DATETIME_FORMAT_SLASH)}">
-        &mdash;
-        <label class="visually-hidden" for="event-end-time-1">To</label>
-        <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${humanizeDate(dateTo, DATETIME_FORMAT_SLASH)}">
-      </div>
+<div class="event__field-group  event__field-group--time">
+<label class="visually-hidden" for="event-start-time-1">From</label>
+<input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${humanizeDate(dateFrom, DateTimeFormat.LONG_DATE_FOR_EDIT)}">
+&mdash;
+<label class="visually-hidden" for="event-end-time-1">To</label>
+<input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${humanizeDate(dateTo, DateTimeFormat.LONG_DATE_FOR_EDIT)}">
+</div>
 
-      <div class="event__field-group  event__field-group--price">
-        <label class="event__label" for="event-price-1">
-          <span class="visually-hidden">Price</span>
-          &euro;
-        </label>
-        <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
-      </div>
+<div class="event__field-group  event__field-group--price">
+<label class="event__label" for="event-price-1">
+<span class="visually-hidden">Price</span>
+&euro;
+</label>
+<input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
+</div>
 
-      <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-      <button class="event__reset-btn" type="reset">Delete</button>
-      <button class="event__rollup-btn" type="button">
-        <span class="visually-hidden">Open event</span>
-      </button>
-    </header>
-    <section class="event__details">
-      ${offersList}
-      ${destinationsList}
-    </form>
-  `;
+<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+<button class="event__reset-btn" type="reset">Delete</button>
+<button class="event__rollup-btn" type="button">
+<span class="visually-hidden">Open event</span>
+</button>
+</header>
+<section class="event__details">
+${offersList}
+${destinationsList}
+</form>
+`;
 }
 
 export default class EditPointView extends AbstractView {
@@ -136,7 +134,7 @@ export default class EditPointView extends AbstractView {
   #destinations = null;
   #handleFormSubmit = null;
 
-  constructor({point, offers, destinations, onFormSubmit}) {
+  constructor({ point, offers, destinations, onFormSubmit }) {
     super();
     this.#point = point;
     this.#offers = offers;
@@ -153,6 +151,6 @@ export default class EditPointView extends AbstractView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit();
+    this.#handleFormSubmit(this.#point);
   };
 }
