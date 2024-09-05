@@ -6,6 +6,12 @@ const Mode = {
   EDITING: 'EDITING'
 };
 
+const SortType = {
+  DAY: 'day',
+  TIME: 'time',
+  PRICE: 'price',
+};
+
 const DateTimeFormat = {
   TIME: 'HH:mm',
   SHORT_DATE: 'MMM D',
@@ -24,6 +30,7 @@ export {
   POINT_COUNT,
   POINT_TYPES,
   Mode,
+  SortType,
   DateTimeFormat,
   NoPointListMessage
 };
