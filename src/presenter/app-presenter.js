@@ -11,7 +11,7 @@ export default class AppPresenter {
   #pointsModel = null;
 
   #eventListComponent = new EventListView();
-  #sortComponent = new SortView();
+  #sortComponent = null;
   #emptyPointsComponent = new EmptyPointsView(NoPointListMessage.EVERYTHING);
 
   #eventPoints = [];
@@ -37,7 +37,16 @@ export default class AppPresenter {
     this.#renderApp();
   }
 
+  #handleSortTypeChange = (sortType) => {
+    // - Сортируем задачи
+    // - Очищаем список
+    // - Рендерим список заново
+  };
+
   #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange,
+    });
     render(this.#sortComponent, this.#eventsContainer);
   }
 
