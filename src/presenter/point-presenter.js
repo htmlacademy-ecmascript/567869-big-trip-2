@@ -71,18 +71,18 @@ export default class PointPresenter {
     remove(this.#pointEditComponent);
   }
 
-  #replacePointToEditForm() {
+  #replacePointToEditForm = () => {
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
     this.#handleModeChange();
     this.#mode = Mode.EDITING;
-  }
+  };
 
-  #replaceEditFormToPoint() {
+  #replaceEditFormToPoint = () => {
     replace(this.#pointComponent, this.#pointEditComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
     this.#mode = Mode.DEFAULT;
-  }
+  };
 
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
@@ -101,6 +101,6 @@ export default class PointPresenter {
   };
 
   #handleFavoriteClick = () => {
-    this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite});
+    this.#handleDataChange({ ...this.#point, isFavorite: !this.#point.isFavorite });
   };
 }

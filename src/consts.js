@@ -1,5 +1,7 @@
-const POINT_COUNT = 3;
+const POINT_COUNT = 5;
 const POINT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+
+const DESTINATIONS = ['San Francisco', 'New York', 'London', 'Moscow'];
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -29,6 +31,7 @@ const NoPointListMessage = {
 export {
   POINT_COUNT,
   POINT_TYPES,
+  DESTINATIONS,
   Mode,
   SortType,
   DateTimeFormat,

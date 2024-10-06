@@ -1,5 +1,25 @@
 import dayjs from 'dayjs';
 
+function getOffersForPoint (point, offers) {
+
+  const pointTypeOffer = offers.find((offer) => offer.type === point.type);
+
+  if (!pointTypeOffer) {
+    return '';
+  }
+  return pointTypeOffer;
+}
+
+function getDestinationForPoint (point, destinations) {
+
+  const destinationData = destinations.find((destination) => destination.id === point.destination);
+
+  if (!destinationData) {
+    return '';
+  }
+  return destinationData;
+}
+
 function humanizeDate(date, format) {
   return date ? dayjs(date).format(format) : '';
 }
@@ -34,4 +54,4 @@ const sortPointTime = (pointA, pointB) => {
 
 const sortPointPrice = (pointA, pointB) => pointA.basePrice - pointB.basePrice;
 
-export { humanizeDate, calculateTimeDifference, sortPointTime, sortPointPrice };
+export { getOffersForPoint, getDestinationForPoint, humanizeDate, calculateTimeDifference, sortPointTime, sortPointPrice };

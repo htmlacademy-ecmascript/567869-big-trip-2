@@ -1,39 +1,83 @@
 const mockDestinations = [
   {
-    id: 'moscow-point-1',
-    description: 'Moscow is the capital of Russia',
+    id: 1,
+    description: 'San Francisco is a city in the state of California, USA',
+    name: 'San Francisco',
+    pictures: [
+      {
+        src: 'https://loremflickr.com/248/152?random=1',
+        description: 'San Francisco 1'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=2',
+        description: 'San Francisco 2'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=3',
+        description: 'San Francisco 3'
+      }
+    ]
+  },
+  {
+    id: 2,
+    description: 'New York is a city in the northeastern United States, in the southern part of New York State. One of the largest and most multinational cities in the world.',
+    name: 'New York',
+    pictures: [
+      {
+        src: 'https://loremflickr.com/248/152?random=23',
+        description: 'New York 1'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=234',
+        description: 'New York 2'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=534',
+        description: 'New York 3'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=13',
+        description: 'New York 4'
+      }
+    ]
+  },
+  {
+    id: 3,
+    description: 'London is the capital of England. It is also the most populous city in Europe.',
+    name: 'London',
+    pictures: [
+      {
+        src: 'https://loremflickr.com/248/152?random=43',
+        description: 'London 1'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=21',
+        description: 'London 2'
+      },
+    ]
+  },
+  {
+    id: 4,
+    description: 'Moscow is the capital of Russia. It is also the largest city in Europe.',
     name: 'Moscow',
     pictures: [
       {
-        src: 'https://plus.unsplash.com/premium_photo-1697730206914-f013a9fa5174?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        description: 'Moscow Kremlin'
-      }
-    ]
-  },
-  {
-    id: 'saint-petersburg-point-2',
-    description: 'Saint Petersburg is a beautiful city',
-    name: 'Saint Petersburg',
-    pictures: [
-      {
-        src: 'https://images.unsplash.com/photo-1603877510016-5ecf6c6cf83b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        description: 'Hermitage'
+        src: 'https://loremflickr.com/248/152?random=10',
+        description: 'Moscow 1'
       },
       {
-        src: 'https://images.unsplash.com/photo-1526402935402-6659f6844efc?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        description: 'Cruiser Aurora'
+        src: 'https://loremflickr.com/248/152?random=234',
+        description: 'Moscow 2'
       },
       {
-        src: 'https://unsplash.com/photos/white-concrete-building-ouN1xz-lcjkhttps://images.unsplash.com/photo-1665910690904-df9283e13eda?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        description: 'Palace Square'
+        src: 'https://loremflickr.com/248/152?random=555',
+        description: 'Moscow 3'
+      },
+      {
+        src: 'https://loremflickr.com/248/152?random=612',
+        description: 'Moscow 4'
       }
     ]
-  },
-  {
-    id: 'belgorod-point-3',
-    description: 'Some text',
-    name: 'Belgorod',
-    pictures: []
   }
 ];
 
