@@ -56,7 +56,7 @@ export default class AppPresenter {
     });
 
     pointPresenter.init(point);
-    this.#pointPresenters.set(point.id, pointPresenter);
+    this.#pointPresenters.set(point.uniqueId, pointPresenter);
   }
 
   #renderPoints() {
@@ -79,12 +79,6 @@ export default class AppPresenter {
     this.#renderSort();
     this.#renderPointList();
   }
-
-  #handlePointChange = (updatedPoint) => {
-    this.#eventPoints = updateItem(this.#eventPoints, updatedPoint);
-    this.#sourcedEventPoints = updateItem(this.#sourcedEventPoints, updatedPoint);
-    this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
-  };
 
   #sortPoints(sortType) {
     switch (sortType) {
@@ -118,6 +112,12 @@ export default class AppPresenter {
     });
     render(this.#sortComponent, this.#eventsContainer);
   }
+
+  #handlePointChange = (updatedPoint) => {
+    this.#eventPoints = updateItem(this.#eventPoints, updatedPoint);
+    this.#sourcedEventPoints = updateItem(this.#sourcedEventPoints, updatedPoint);
+    this.#pointPresenters.get(updatedPoint.uniqueId).init(updatedPoint);
+  };
 
   #handleModeChange = () => {
     this.#pointPresenters.forEach((presenter) => presenter.resetFormView());

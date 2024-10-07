@@ -1,20 +1,18 @@
 import { DateTimeFormat } from '../consts.js';
 import AbstractView from '../framework/view/abstract-view.js';
-import { calculateTimeDifference, humanizeDate } from '../utils/point.js';
+import { getOffersForPoint, getDestinationForPoint, calculateTimeDifference, humanizeDate } from '../utils/point.js';
 
 function createSelectedOffersTemplate(point, offers) {
-  const offerData = offers.find((offer) => offer.type === point.type);
-
-  if (!offerData || !point.offers || point.offers.length === 0) {
-    return '';
-  }
+  const pointTypeOffer = getOffersForPoint(point, offers);
 
   const pointOffers = point.offers.map((offerId) => {
-    const foundOffer = offerData.offers.find((offer) => offer.id === offerId);
+
+    const foundOffer = pointTypeOffer.offers.find((offer) => offer.id === offerId);
     if (!foundOffer) {
       return '';
     }
     const { title, price } = foundOffer;
+
 
     return `<li class="event__offer">
       <span class="event__offer-title">${title}</span>
@@ -27,14 +25,18 @@ function createSelectedOffersTemplate(point, offers) {
 }
 
 function createPointTemplate(point, offers, destinations) {
+
   const { type, dateFrom, dateTo, basePrice, isFavorite } = point;
-  const destinationData = destinations.find((destination) => destination.id === point.destination);
+  const destinationData = getDestinationForPoint(point, destinations);
   const { name } = destinationData;
 
-  const isFavoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
+  const isFavoriteClassName = isFavorite
+    ? 'event__favorite-btn--active'
+    : '';
+
   const selectedOfferTemplate = createSelectedOffersTemplate(point, offers);
 
-  return `
+  return (`
     <div class="event">
       <time class="event__date" datetime="${dateFrom}">${humanizeDate(dateFrom, DateTimeFormat.SHORT_DATE)}</time>
       <div class="event__type">
@@ -47,7 +49,7 @@ function createPointTemplate(point, offers, destinations) {
           &mdash;
           <time class="event__end-time" datetime="${humanizeDate(dateTo, DateTimeFormat.LONG_DATE)}">${humanizeDate(dateTo, DateTimeFormat.TIME)}</time>
         </p>
-        <p class="event__duration">${calculateTimeDifference(dateFrom,dateTo)}</p>
+        <p class="event__duration">${calculateTimeDifference(dateFrom, dateTo)}</p>
       </div>
       <p class="event__price">
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
@@ -66,7 +68,7 @@ function createPointTemplate(point, offers, destinations) {
         <span class="visually-hidden">Open event</span>
       </button>
     </div>
-  `;
+  `);
 }
 
 export default class PointView extends AbstractView {
@@ -76,7 +78,7 @@ export default class PointView extends AbstractView {
   #handleEditClick = null;
   #handleFavoriteClick = null;
 
-  constructor({point, offers, destinations, onEditClick, onFavoriteClick}) {
+  constructor({ point, offers, destinations, onEditClick, onFavoriteClick }) {
     super();
     this.#point = point;
     this.#offers = offers;
