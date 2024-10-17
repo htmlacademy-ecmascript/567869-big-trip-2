@@ -300,31 +300,29 @@ export default class EditPointView extends AbstractStatefulView {
     });
   };
 
+  #createDatepickerConfig(defaultDate, minDate, maxDate, onCloseHandler) {
+    return {
+      dateFormat: 'd/m/y H:i',
+      enableTime: true,
+      'time_24hr': true,
+      defaultDate: defaultDate,
+      minDate: minDate,
+      maxDate: maxDate,
+      onClose: onCloseHandler
+    };
+  }
+
   #setStartDatepicker() {
     this.#startDatepicker = flatpickr(
       this.element.querySelector('#event-start-time-1'),
-      {
-        dateFormat: 'd/m/y H:i',
-        enableTime: true,
-        'time_24hr': true,
-        defaultDate: this._state.dateFrom,
-        maxDate: this._state.dateTo,
-        onClose: this.#startDateChangeHandler
-      }
+      this.#createDatepickerConfig(this._state.dateFrom, null, this._state.dateTo, this.#startDateChangeHandler)
     );
   }
 
   #setEndDatepicker() {
     this.#endDatepicker = flatpickr(
       this.element.querySelector('#event-end-time-1'),
-      {
-        dateFormat: 'd/m/y H:i',
-        enableTime: true,
-        'time_24hr': true,
-        defaultDate: this._state.dateTo,
-        minDate: this._state.dateFrom,
-        onClose: this.#endDateChangeHandler
-      }
+      this.#createDatepickerConfig(this._state.dateTo, this._state.dateFrom, null, this.#endDateChangeHandler)
     );
   }
 
